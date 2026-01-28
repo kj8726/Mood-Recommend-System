@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(express.static("public"));
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 
 
@@ -28,27 +28,19 @@ const moodMap = {
     "park",
     "gym",
     "stadium",
-    "tourist_attraction",
-    "bowling_alley",
-    "hiking_area"
+    "tourist_attraction"
   ],
 
   sad: [
-    "temple",
-    "church",
-    "mosque",
-    "cemetery",
+    "place_of_worship",
     "library",
     "art_gallery"
   ],
 
   relaxed: [
     "spa",
-    "lake",
-    "garden",
     "park",
     "museum",
-    "book_store",
     "cafe"
   ]
 };
@@ -64,10 +56,16 @@ app.get("/recommend", async (req, res) => {
     let results = [];
 
     for (let type of types) {
-      const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=3000&type=${type}&key=${GOOGLE_API_KEY}`;
+      const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=6000&keyword=${type}&key=${GOOGLE_API_KEY}`;
+
 
       const response = await axios.get(url);
+
+      console.log("Google status:", response.data.status);
+      console.log("Results count:", response.data.results.length);
+
       results.push(...response.data.results);
+
     }
 
     res.json(results);

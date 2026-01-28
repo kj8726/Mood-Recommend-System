@@ -14,6 +14,8 @@ function initMap() {
   navigator.geolocation.getCurrentPosition(pos => {
     const { latitude, longitude } = pos.coords;
 
+    console.log("Location:", latitude, longitude);
+    
     window.map = new google.maps.Map(document.getElementById("map"), {
       center: { lat: latitude, lng: longitude },
       zoom: 14
