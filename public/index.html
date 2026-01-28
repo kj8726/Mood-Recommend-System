@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mood Based Recommender</title>
+  <link rel="stylesheet" href="index.css">
+
+</head>
+<body>
+
+<div class="app">
+  <h2>Mood Based Place Recommendation</h2>
+
+  <div class="controls">
+    <select id="mood">
+      <option value="happy">😊 Happy</option>
+      <option value="energetic">⚡ Energetic</option>
+      <option value="sad">😔 Sad</option>
+      <option value="relaxed">😌 Relaxed</option>
+    </select>
+
+    <select id="sort">
+        <option value="none">Sort</option>
+        <option value="rating">⭐ Highest Rating</option>
+        <option value="reviews">📝 Most Reviews</option>
+    </select>
+
+
+    <button onclick="getPlaces()">Recommend</button>
+  </div>
+
+  <div id="map"></div>
+
+  <footer>Built with Google Maps API</footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+
+</html>
